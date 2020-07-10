@@ -4,6 +4,7 @@ project(ball_chaser)
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
 
+set(OpenCV_DIR /usr/share/OpenCV/)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
@@ -11,6 +12,9 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   std_msgs
   roscpp
+  sensor_msgs
+  cv_bridge
+  OpenCV REQUIRED
 )
 
 ## System dependencies are found with CMake's conventions
@@ -117,6 +121,7 @@ catkin_package(
 include_directories(
  include
   ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -209,5 +214,5 @@ target_link_libraries(drive_bot ${catkin_LIBRARIES} )
 add_dependencies (drive_bot ball_chaser_generate_messages_cpp)
 
 add_executable(process_image src/process_image)
-target_link_libraries(process_image ${catkin_LIBRARIES})
+target_link_libraries(process_image ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 add_dependencies(process_image ball_chaser_generate_messages_cpp)
