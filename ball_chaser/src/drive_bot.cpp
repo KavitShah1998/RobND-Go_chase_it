@@ -1,3 +1,4 @@
+
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <ball_chaser/DriveToTarget.h>
@@ -40,7 +41,7 @@ int main(int argc, char ** argv){
 
     ros::NodeHandle n;
 
-    motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
+    motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vel", 2);
     ros::ServiceServer my_server = n.advertiseService("/ball_chaser/command_robot", handle_drive_request);
 
     ROS_INFO("Drive_bot service ready."); 
